@@ -47,8 +47,6 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
     [self.tableView reloadData];
 }
 
-#define ONE_MPH_IN_KMH ((double) 0.621371)
-
 - (void)openMapForLocation:(CLLocation *)location
 {
     MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:location.coordinate

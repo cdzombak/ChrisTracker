@@ -1,7 +1,5 @@
 #import "CDZWhereIsChrisAPIClient.h"
 
-#define ONE_MPH_IN_KMH ((double) 0.621371)
-
 @interface CDZWhereIsChrisAPIClient ()
 
 @property (nonatomic, strong) NSString *apiKey;

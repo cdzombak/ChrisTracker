@@ -1,7 +1,5 @@
 #import "CDZTracker.h"
 
-#define TENTH_MILE_IN_METERS ((CLLocationDistance) 160.934)
-
 @interface CDZTracker () <CLLocationManagerDelegate>
 
 @property (nonatomic, readonly, strong) CLLocationManager *locationManager;
