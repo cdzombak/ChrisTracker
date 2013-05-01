@@ -17,16 +17,26 @@
     self = [super init];
     if (self) {
         self.isLocationTracking = NO;
+
+        UIDevice *device = [UIDevice currentDevice];
+        device.batteryMonitoringEnabled = YES;
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(batteryChanged:)
+                                                     name:UIDeviceBatteryStateDidChangeNotification
+                                                   object:device];
     }
     return self;
 }
 
+- (void)batteryChanged:(NSNotification *)notification
+{
+    [self configureLocationManagerForCurrentBatteryState];
+}
 
 - (void)startLocationTracking
 {
     self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation; // TODO change on batt to kCLLocationAccuracyBest
-    self.locationManager.distanceFilter = TENTH_MILE_IN_METERS; // TODO change on batt to 2 tenth mile
+    [self configureLocationManagerForCurrentBatteryState];
     [self.locationManager startUpdatingLocation];
     self.isLocationTracking = YES;
 }
@@ -42,6 +52,18 @@
 {
     [self.locationManager stopUpdatingLocation];
     [self.locationManager startUpdatingLocation];
+}
+
+- (void)configureLocationManagerForCurrentBatteryState
+{
+    UIDeviceBatteryState batteryState = [[UIDevice currentDevice] batteryState];
+    if (batteryState == UIDeviceBatteryStateUnknown || batteryState == UIDeviceBatteryStateUnplugged) {
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        self.locationManager.distanceFilter = 2*TENTH_MILE_IN_METERS;
+    } else { // charging || full
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
+        self.locationManager.distanceFilter = TENTH_MILE_IN_METERS;
+    }
 }
 
 #pragma mark CLLocationManagerDelegate methods
