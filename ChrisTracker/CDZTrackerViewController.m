@@ -39,6 +39,20 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
     return self;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navBarDoubleTapped:)];
+    gr.numberOfTapsRequired = 2;
+    [self.navigationController.navigationBar addGestureRecognizer:gr];
+}
+
+- (void)navBarDoubleTapped:(id)sender
+{
+    [self presentMessage:@"NavBar double-tapped" withAppInForeground:NO];
+}
+
 - (void)tracker:(CDZTracker *)tracker didUpdateLocation:(CLLocation *)location
 {
     NSParameterAssert(tracker == self.tracker);
