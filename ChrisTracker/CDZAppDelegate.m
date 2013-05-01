@@ -1,9 +1,11 @@
 #import "CDZAppDelegate.h"
+#import "CDZTracker.h"
 #import "CDZTrackerViewController.h"
 
-@interface CDZAppDelegate ()
+@interface CDZAppDelegate () <CDZTrackerDelegate>
 
 @property (strong, nonatomic) CDZTrackerViewController *viewController;
+@property (strong, nonatomic) CDZTracker *tracker;
 
 @end
 
@@ -12,12 +14,21 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
     self.viewController = [[CDZTrackerViewController alloc] init];
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
-
     [self.window makeKeyAndVisible];
+
+    [self setupTracker];
+
     return YES;
+}
+
+- (void)setupTracker
+{
+    self.tracker = [[CDZTracker alloc] init];
+    self.tracker.delegate = self;
+    self.viewController.tracker = self.tracker;
+    [self.tracker startLocationTracking];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -45,6 +56,16 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark CDZTrackerDelegate methods
+
+- (void)tracker:(CDZTracker *)tracker didUpdateLocation:(CLLocation *)location
+{
+    NSParameterAssert(tracker == self.tracker);
+    
+    // TODO log to API, then update UI…
+    [self.viewController tracker:tracker didUpdateLocation:location];
 }
 
 @end

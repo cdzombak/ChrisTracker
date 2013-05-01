@@ -13,14 +13,17 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewStatusRows) {
 };
 
 typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
-    CDZTrackerTableViewInfoSpeed = 0,
+    CDZTrackerTableViewInfoLocation = 0,
+    CDZTrackerTableViewInfoSpeed,
     CDZTrackerTableViewInfoHeading,
-    CDZTrackerTableViewInfoLat,
-    CDZTrackerTableViewInfoLon,
+    CDZTrackerTableViewInfoAccuracy,
     CDZTrackerTableViewInfoNumRows
 };
 
 @interface CDZTrackerViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong) CLLocation *lastLocation;
+@property (nonatomic, assign) BOOL currentlyTracking;
 
 @end
 
@@ -31,15 +34,23 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         self.title = @"ChrisTracker";
+        self.currentlyTracking = NO;
     }
     return self;
 }
 
-- (void)viewDidLoad
+- (void)tracker:(CDZTracker *)tracker didUpdateLocation:(CLLocation *)location
 {
-    [super viewDidLoad];
+    NSParameterAssert(tracker == self.tracker);
 
-    // TODO
+    self.lastLocation = location;
+    self.currentlyTracking = tracker.isLocationTracking;
+    [self updateUi];
+}
+
+- (void)updateUi
+{
+    [self.tableView reloadData];
 }
 
 #pragma mark UITableViewDataSource methods
@@ -74,38 +85,63 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
     };
     UITableViewCellStyle style = indexPath.section == CDZTrackerTableViewSectionStatus ? UITableViewCellStyleSubtitle : UITableViewCellStyleValue2;
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:style reuseIdentifier:CellIdentifiers[indexPath.section]];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
     switch(indexPath.section) {
         case CDZTrackerTableViewSectionStatus:
             switch(indexPath.row) {
-                case CDZTrackerTableViewStatusStartStopLogging:
-                    cell.textLabel.text = @"Start/Stop Logging"; // TODO
-                    cell.detailTextLabel.text = @"Last log date"; // TODO
+                case CDZTrackerTableViewStatusStartStopLogging: {
+                    cell.textLabel.text = self.currentlyTracking ? @"Tracking Now…" : @"Start Tracking";
+                    cell.detailTextLabel.text = self.currentlyTracking ? @"Tap to stop tracking" : @"";
                     break;
-                case CDZTrackerTableViewStatusForceLog:
-                    cell.textLabel.text = @"last log date"; // TODO
+                }
+                case CDZTrackerTableViewStatusForceLog: {
+                    NSString *lastLogDate = @"";
+                    if (self.lastLocation) lastLogDate = [NSString stringWithFormat:@"Updated %@",
+                                                          [NSDateFormatter localizedStringFromDate:self.lastLocation.timestamp
+                                                                                         dateStyle:NSDateFormatterShortStyle
+                                                                                         timeStyle:NSDateFormatterShortStyle]
+                                                          ];
+                    cell.textLabel.text = lastLogDate;
                     cell.detailTextLabel.text = @"Tap to track & log now";
                     break;
+                }
             }
             break;
         case CDZTrackerTableViewSectionInfo:
             switch(indexPath.row) {
-                case CDZTrackerTableViewInfoSpeed:
-                    cell.textLabel.text = @"mph";
-                    cell.detailTextLabel.text = @"todo"; // TODO
+                case CDZTrackerTableViewInfoSpeed: {
+                    cell.textLabel.text = @"Speed";
+                    NSString *speedStr = @"";
+                    if (self.lastLocation && !self.lastLocation.speed < 0) speedStr = [NSString stringWithFormat:@"%d mph", (int)self.lastLocation.speed];
+                    cell.detailTextLabel.text = speedStr;
                     break;
-                case CDZTrackerTableViewInfoHeading:
+                }
+                case CDZTrackerTableViewInfoHeading: {
                     cell.textLabel.text = @"Heading";
-                    cell.detailTextLabel.text = @"todo"; // TODO
+                    NSString *courseStr = @"";
+                    if (self.lastLocation && !self.lastLocation.course < 0) courseStr = [NSString stringWithFormat:@"%d°", (int)self.lastLocation.course];
+                    cell.detailTextLabel.text = courseStr;
                     break;
-                case CDZTrackerTableViewInfoLat:
-                    cell.textLabel.text = @"Latitude";
-                    cell.detailTextLabel.text = @"todo"; // TODO
+                }
+                case CDZTrackerTableViewInfoLocation: {
+                    cell.textLabel.text = @"Location";
+                    NSString *locStr = @"";
+                    if (self.lastLocation) locStr = [NSString stringWithFormat:@"%0.3f, %0.3f",
+                                                     self.lastLocation.coordinate.latitude,
+                                                     self.lastLocation.coordinate.longitude
+                                                    ];
+                    cell.detailTextLabel.text = locStr;
                     break;
-                case CDZTrackerTableViewInfoLon:
-                    cell.textLabel.text = @"Longitude";
-                    cell.detailTextLabel.text = @"todo"; // TODO
+                }
+                case CDZTrackerTableViewInfoAccuracy: {
+                    cell.textLabel.text = @"Accuracy";
+                    NSString *accStr = @"";
+                    if (self.lastLocation) accStr = [NSString stringWithFormat:@"%d m",
+                                                     (int)round(self.lastLocation.horizontalAccuracy)];
+                    cell.detailTextLabel.text = accStr;
                     break;
+                }
             }
             break;
     }
@@ -121,7 +157,7 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
         case CDZTrackerTableViewSectionStatus:
             return nil;
         case CDZTrackerTableViewSectionInfo:
-            return @"Last Logged";
+            return @"Last Logged Track";
     }
     return nil;
 }
@@ -131,6 +167,14 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // TODO
+}
+
+#pragma mark Property overrides
+
+- (void)setTracker:(CDZTracker *)tracker
+{
+    _tracker = tracker;
+    self.currentlyTracking = tracker.isLocationTracking;
 }
 
 @end
