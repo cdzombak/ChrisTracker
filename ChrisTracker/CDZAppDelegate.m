@@ -26,15 +26,38 @@
 
     [self setupTracker];
 
+    UIDevice *device = [UIDevice currentDevice];
+    device.batteryMonitoringEnabled = YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(batteryLevelChanged:)
+                                                 name:UIDeviceBatteryLevelDidChangeNotification
+                                               object:device];
+
     NSLog(@"%s", __PRETTY_FUNCTION__);
     return YES;
+}
+
+- (void)batteryLevelChanged:(NSNotification *)notification
+{
+    CGFloat batterylevel = [UIDevice currentDevice].batteryLevel;
+    if (batterylevel <= 0.2 && batterylevel >= 0) {
+        [self.tracker stopLocationTracking];
+        [self displayBatteryWarning];
+    }
 }
 
 - (void)setupTracker
 {
     self.tracker = [[CDZTracker alloc] init];
     self.tracker.delegate = self;
-    [self.tracker startLocationTracking];
+    
+    CGFloat batterylevel = [UIDevice currentDevice].batteryLevel;
+    if (batterylevel <= 0.2 && batterylevel >= 0) {
+        [self displayBatteryWarning];
+    } else {
+        [self.tracker startLocationTracking];
+    }
+    
     self.viewController.tracker = self.tracker;
 }
 
@@ -95,6 +118,11 @@
     [self.viewController presentQueuedMessage];
 
     NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (void)displayBatteryWarning
+{
+    [self.viewController presentMessage:@"Tracking is disabled while battery < 20%" withAppInForeground:self.appIsInForeground];
 }
 
 #pragma mark CDZTrackerDelegate methods
