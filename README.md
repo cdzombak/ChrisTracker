@@ -8,4 +8,3 @@
 * stops logging when battery reaches 20%
     * alerts you; delivered via UIalert and/or local notification
 * TODO logs currently playing to lastfm in the background
-* TODO icon/defaultpng
