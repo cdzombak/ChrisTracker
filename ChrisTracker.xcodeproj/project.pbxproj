@@ -17,9 +17,11 @@
 		837C01551730BA2600637EE2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 837C01541730BA2600637EE2 /* Default@2x.png */; };
 		837C01571730BA2600637EE2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 837C01561730BA2600637EE2 /* Default-568h@2x.png */; };
 		837C015A1730BA2600637EE2 /* CDZTrackerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C01591730BA2600637EE2 /* CDZTrackerViewController.m */; };
+		B36CF648ED574F96B8DB62C4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48796A2D746C48A891642350 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		48796A2D746C48A891642350 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		837C013D1730BA2600637EE2 /* ChrisTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChrisTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		837C01401730BA2600637EE2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		837C01421730BA2600637EE2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -35,6 +37,7 @@
 		837C01561730BA2600637EE2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		837C01581730BA2600637EE2 /* CDZTrackerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDZTrackerViewController.h; sourceTree = "<group>"; };
 		837C01591730BA2600637EE2 /* CDZTrackerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDZTrackerViewController.m; sourceTree = "<group>"; };
+		DBF7E2972E8E49A5B159AA93 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +48,7 @@
 				837C01411730BA2600637EE2 /* UIKit.framework in Frameworks */,
 				837C01431730BA2600637EE2 /* Foundation.framework in Frameworks */,
 				837C01451730BA2600637EE2 /* CoreGraphics.framework in Frameworks */,
+				B36CF648ED574F96B8DB62C4 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +61,7 @@
 				837C01461730BA2600637EE2 /* ChrisTracker */,
 				837C013F1730BA2600637EE2 /* Frameworks */,
 				837C013E1730BA2600637EE2 /* Products */,
+				DBF7E2972E8E49A5B159AA93 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,6 +79,7 @@
 				837C01401730BA2600637EE2 /* UIKit.framework */,
 				837C01421730BA2600637EE2 /* Foundation.framework */,
 				837C01441730BA2600637EE2 /* CoreGraphics.framework */,
+				48796A2D746C48A891642350 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -111,9 +117,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 837C01601730BA2600637EE2 /* Build configuration list for PBXNativeTarget "ChrisTracker" */;
 			buildPhases = (
+				74F0B287C83B42D5BE0B8149 /* Check Pods Manifest.lock */,
 				837C01391730BA2600637EE2 /* Sources */,
 				837C013A1730BA2600637EE2 /* Frameworks */,
 				837C013B1730BA2600637EE2 /* Resources */,
+				B69F5BFF7C784D3B9B640173 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -164,6 +172,37 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		74F0B287C83B42D5BE0B8149 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+		};
+		B69F5BFF7C784D3B9B640173 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		837C01391730BA2600637EE2 /* Sources */ = {
@@ -248,6 +287,7 @@
 		};
 		837C01611730BA2600637EE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DBF7E2972E8E49A5B159AA93 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ChrisTracker/ChrisTracker-Prefix.pch";
@@ -259,6 +299,7 @@
 		};
 		837C01621730BA2600637EE2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DBF7E2972E8E49A5B159AA93 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ChrisTracker/ChrisTracker-Prefix.pch";
@@ -287,6 +328,7 @@
 				837C01621730BA2600637EE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

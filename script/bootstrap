@@ -1,0 +1,7 @@
+#!/bin/sh
+# Usage: script/bootstrap
+# Initializes your environment for development'
+
+# Bundler setup
+bundle install --binstubs --path Vendor/bundle
+bundle exec pod install
