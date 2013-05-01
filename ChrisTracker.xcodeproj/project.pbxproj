@@ -22,6 +22,10 @@
 		837C016A17318CA100637EE2 /* CDZWhereIsChrisAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C016917318CA100637EE2 /* CDZWhereIsChrisAPIClient.m */; };
 		837C016C1731937800637EE2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 837C016B1731937800637EE2 /* MapKit.framework */; };
 		837C016E173196DE00637EE2 /* apikey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 837C016D173196DE00637EE2 /* apikey.plist */; };
+		837C01821731C00200637EE2 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 837C01801731C00200637EE2 /* Icon-Small.png */; };
+		837C01831731C00200637EE2 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 837C01811731C00200637EE2 /* Icon-Small@2x.png */; };
+		837C01861731C01300637EE2 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 837C01841731C01300637EE2 /* Icon.png */; };
+		837C01871731C01300637EE2 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 837C01851731C01300637EE2 /* Icon@2x.png */; };
 		B36CF648ED574F96B8DB62C4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48796A2D746C48A891642350 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +53,10 @@
 		837C016917318CA100637EE2 /* CDZWhereIsChrisAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDZWhereIsChrisAPIClient.m; sourceTree = "<group>"; };
 		837C016B1731937800637EE2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		837C016D173196DE00637EE2 /* apikey.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = apikey.plist; sourceTree = "<group>"; };
+		837C01801731C00200637EE2 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small.png"; path = "../icon/product/Icon-Small.png"; sourceTree = "<group>"; };
+		837C01811731C00200637EE2 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small@2x.png"; path = "../icon/product/Icon-Small@2x.png"; sourceTree = "<group>"; };
+		837C01841731C01300637EE2 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../icon/product/Icon.png; sourceTree = "<group>"; };
+		837C01851731C01300637EE2 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../icon/product/Icon@2x.png"; sourceTree = "<group>"; };
 		DBF7E2972E8E49A5B159AA93 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -126,6 +134,10 @@
 				837C01521730BA2600637EE2 /* Default.png */,
 				837C01541730BA2600637EE2 /* Default@2x.png */,
 				837C01561730BA2600637EE2 /* Default-568h@2x.png */,
+				837C01841731C01300637EE2 /* Icon.png */,
+				837C01851731C01300637EE2 /* Icon@2x.png */,
+				837C01801731C00200637EE2 /* Icon-Small.png */,
+				837C01811731C00200637EE2 /* Icon-Small@2x.png */,
 				837C016D173196DE00637EE2 /* apikey.plist */,
 			);
 			name = "Supporting Files";
@@ -190,6 +202,10 @@
 				837C01551730BA2600637EE2 /* Default@2x.png in Resources */,
 				837C01571730BA2600637EE2 /* Default-568h@2x.png in Resources */,
 				837C016E173196DE00637EE2 /* apikey.plist in Resources */,
+				837C01821731C00200637EE2 /* Icon-Small.png in Resources */,
+				837C01831731C00200637EE2 /* Icon-Small@2x.png in Resources */,
+				837C01861731C01300637EE2 /* Icon.png in Resources */,
+				837C01871731C01300637EE2 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
