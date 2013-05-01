@@ -1,0 +1,35 @@
+.DS_Store
+*.swp
+*~.nib
+
+build/
+
+*.pbxuser
+*.perspective
+*.perspectivev3
+*.mode1v3
+*.mode2v3
+
+*.xcodeproj/project.xcworkspace/xcuserdata/*
+*.xcodeproj/xcuserdata/*
+
+# if not using Xcode 4:
+*.xcodeproj/project.xcworkspace/*
+
+# Xcode workspace
+xcuserdata
+
+# OCUnit2JUnit output
+test-reports
+
+# Bundler
+.bundle
+Vendor/bundle/ruby
+/bin
+
+# CocoaPods
+Pods
+
+# Clang scan-build
+# http://clang-analyzer.llvm.org/scan-build.html
+clangScanBuildReports/
