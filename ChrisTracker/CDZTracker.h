@@ -10,6 +10,7 @@
 
 - (void)startLocationTracking;
 - (void)stopLocationTracking;
+- (void)forceLogLatestInfo;
 
 // TODO battery monitoring callbacks
 

@@ -1,4 +1,5 @@
 #import "CDZTrackerViewController.h"
+#import <MapKit/MapKit.h>
 
 typedef NS_ENUM(NSUInteger, CDZTrackerTableViewSections) {
     CDZTrackerTableViewSectionStatus = 0,  // displays "Start/Stop Logging" + secondary "currently logging"; then "last log date" + secondary "log now"
@@ -23,7 +24,6 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
 @interface CDZTrackerViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) CLLocation *lastLocation;
-@property (nonatomic, assign) BOOL currentlyTracking;
 
 @end
 
@@ -34,7 +34,6 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         self.title = @"ChrisTracker";
-        self.currentlyTracking = NO;
     }
     return self;
 }
@@ -44,13 +43,25 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
     NSParameterAssert(tracker == self.tracker);
 
     self.lastLocation = location;
-    self.currentlyTracking = tracker.isLocationTracking;
-    [self updateUi];
+    [self.tableView reloadData];
 }
 
-- (void)updateUi
+#define ONE_MPH_IN_KMH ((double) 0.621371)
+
+- (void)openMapForLocation:(CLLocation *)location
 {
-    [self.tableView reloadData];
+    MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:location.coordinate
+                                                   addressDictionary:nil];
+    MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+
+    NSString *name = @"Last Logged";
+    CGFloat speedMph = location.speed * ONE_MPH_IN_KMH;
+    if (location.speed > 1) {
+        name = [NSString stringWithFormat:@"%@: %d° at %d mph", name, (int)round(location.course), (int)round(speedMph)];
+    }
+    mapItem.name = name;
+
+    [mapItem openInMapsWithLaunchOptions:nil];
 }
 
 #pragma mark UITableViewDataSource methods
@@ -91,8 +102,8 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
         case CDZTrackerTableViewSectionStatus:
             switch(indexPath.row) {
                 case CDZTrackerTableViewStatusStartStopLogging: {
-                    cell.textLabel.text = self.currentlyTracking ? @"Tracking Now…" : @"Start Tracking";
-                    cell.detailTextLabel.text = self.currentlyTracking ? @"Tap to stop tracking" : @"";
+                    cell.textLabel.text = self.tracker.isLocationTracking ? @"Tracking Now…" : @"Start Tracking";
+                    cell.detailTextLabel.text = self.tracker.isLocationTracking ? @"Tap to stop tracking" : @"";
                     break;
                 }
                 case CDZTrackerTableViewStatusForceLog: {
@@ -166,15 +177,25 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO
-}
+    NSParameterAssert(tableView == self.tableView);
 
-#pragma mark Property overrides
+    if (indexPath.section == CDZTrackerTableViewSectionInfo) {
+        [self openMapForLocation:self.lastLocation];
+    } else {
+        switch (indexPath.row) {
+            case CDZTrackerTableViewStatusStartStopLogging:
+                if (self.tracker.isLocationTracking) [self.tracker stopLocationTracking];
+                else [self.tracker startLocationTracking];
+                [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                break;
+            case CDZTrackerTableViewStatusForceLog:
+                if (!self.tracker.isLocationTracking) [self.tracker startLocationTracking];
+                else [self.tracker forceLogLatestInfo];
+                break;
+        }
+    }
 
-- (void)setTracker:(CDZTracker *)tracker
-{
-    _tracker = tracker;
-    self.currentlyTracking = tracker.isLocationTracking;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

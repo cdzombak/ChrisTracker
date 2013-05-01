@@ -33,3 +33,5 @@ Pods
 # Clang scan-build
 # http://clang-analyzer.llvm.org/scan-build.html
 clangScanBuildReports/
+
+apikey.plist

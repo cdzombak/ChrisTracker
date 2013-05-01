@@ -1,6 +1,8 @@
 #import "CDZAppDelegate.h"
 #import "CDZTracker.h"
 #import "CDZTrackerViewController.h"
+#import "CDZWhereIsChrisAPIClient.h"
+#import "AFNetworkActivityIndicatorManager.h"
 
 @interface CDZAppDelegate () <CDZTrackerDelegate>
 
@@ -18,6 +20,8 @@
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
     [self.window makeKeyAndVisible];
 
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+
     [self setupTracker];
 
     return YES;
@@ -27,8 +31,8 @@
 {
     self.tracker = [[CDZTracker alloc] init];
     self.tracker.delegate = self;
-    self.viewController.tracker = self.tracker;
     [self.tracker startLocationTracking];
+    self.viewController.tracker = self.tracker;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -64,8 +68,12 @@
 {
     NSParameterAssert(tracker == self.tracker);
     
-    // TODO log to API, then update UI…
-    [self.viewController tracker:tracker didUpdateLocation:location];
+    [[CDZWhereIsChrisAPIClient sharedClient] track:location success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.viewController tracker:tracker didUpdateLocation:location];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        // TODO handle error
+        NSLog(@"%@", [error localizedDescription]);
+    }];
 }
 
 @end

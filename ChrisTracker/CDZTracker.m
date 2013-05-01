@@ -40,6 +40,12 @@
     self.lastUpdateReceived = nil;
 }
 
+- (void)forceLogLatestInfo
+{
+    [self.locationManager stopUpdatingLocation];
+    [self.locationManager startUpdatingLocation];
+}
+
 #pragma mark CLLocationManagerDelegate methods
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
