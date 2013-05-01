@@ -28,7 +28,7 @@
 {
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation; // TODO change on batt to kCLLocationAccuracyBest
-    self.locationManager.distanceFilter = TENTH_MILE_IN_METERS/2; // TODO change on batt to tenth mile
+    self.locationManager.distanceFilter = TENTH_MILE_IN_METERS; // TODO change on batt to 2 tenth mile
     [self.locationManager startUpdatingLocation];
     self.isLocationTracking = YES;
 }
