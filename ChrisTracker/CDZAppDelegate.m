@@ -63,6 +63,15 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 
     NSLog(@"%s", __PRETTY_FUNCTION__);
+
+    if (self.tracker.isLocationTracking) {
+        UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+        if (localNotif) {
+            localNotif.alertBody = @"ChrisTracker has died and is no longer tracking you.";
+            localNotif.alertAction = @"Open ChrisTracker to restart tracking";
+            [application presentLocalNotificationNow:localNotif];
+        }
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
