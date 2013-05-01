@@ -12,4 +12,7 @@
 // called by somebody when the given location has been posted to the server
 - (void)tracker:(CDZTracker *)tracker didUpdateLocation:(CLLocation *)location;
 
+- (void)presentQueuedError;
+- (void)presentError:(NSError *)error withAppInForeground:(BOOL)inForeground;
+
 @end

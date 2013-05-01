@@ -24,6 +24,7 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
 @interface CDZTrackerViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) CLLocation *lastLocation;
+@property (nonatomic, strong) NSError *queuedErrorToPresent;
 
 @end
 
@@ -62,6 +63,34 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
     mapItem.name = name;
 
     [mapItem openInMapsWithLaunchOptions:nil];
+}
+
+- (void)presentError:(NSError *)error withAppInForeground:(BOOL)inForeground
+{
+    self.queuedErrorToPresent = error;
+    
+    if (inForeground) {
+        [self presentQueuedError];
+    } else {
+        UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+        if (localNotif) {
+            localNotif.alertBody = [error localizedDescription];
+            [[UIApplication sharedApplication] presentLocalNotificationNow:localNotif];
+        }
+    }
+}
+
+- (void)presentQueuedError
+{
+    if (!self.queuedErrorToPresent) return;
+
+    [[[UIAlertView alloc] initWithTitle:@"Error"
+                                message:[self.queuedErrorToPresent localizedDescription]
+                               delegate:nil
+                      cancelButtonTitle:@":("
+                      otherButtonTitles:nil]
+     show];
+    self.queuedErrorToPresent = nil;
 }
 
 #pragma mark UITableViewDataSource methods

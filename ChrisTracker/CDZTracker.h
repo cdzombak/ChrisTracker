@@ -20,4 +20,8 @@
 
 - (void)tracker:(CDZTracker *)tracker didUpdateLocation:(CLLocation *)location;
 
+@optional
+
+- (void)tracker:(CDZTracker *)tracker didEncounterError:(NSError *)error;
+
 @end

@@ -8,6 +8,7 @@
 
 @property (strong, nonatomic) CDZTrackerViewController *viewController;
 @property (strong, nonatomic) CDZTracker *tracker;
+@property (nonatomic, assign, readwrite) BOOL appIsInForeground;
 
 @end
 
@@ -19,6 +20,7 @@
     self.viewController = [[CDZTrackerViewController alloc] init];
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
     [self.window makeKeyAndVisible];
+    self.appIsInForeground = YES;
 
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 
@@ -43,6 +45,8 @@
     // when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates.
     // Games should use this method to pause the game.
+
+    self.appIsInForeground = NO;
 
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
@@ -87,6 +91,9 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive.
     // If the application was previously in the background, optionally refresh the user interface.
 
+    self.appIsInForeground = YES;
+    [self.viewController presentQueuedError];
+
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
@@ -99,9 +106,14 @@
     [[CDZWhereIsChrisAPIClient sharedClient] track:location success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.viewController tracker:tracker didUpdateLocation:location];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        // TODO handle error
-        NSLog(@"%@", [error localizedDescription]);
+        [self.viewController presentError:error withAppInForeground:self.appIsInForeground];
     }];
+}
+
+- (void)tracker:(CDZTracker *)tracker didEncounterError:(NSError *)error
+{
+//    [self.viewController presentError:error withAppInForeground:self.appIsInForeground];
+//    [self setupTracker];
 }
 
 @end

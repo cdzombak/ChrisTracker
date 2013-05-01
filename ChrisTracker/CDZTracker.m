@@ -58,6 +58,13 @@
     [self.delegate tracker:self didUpdateLocation:location];
 }
 
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    if ([self.delegate respondsToSelector:@selector(tracker:didEncounterError:)]) {
+        [self.delegate tracker:self didEncounterError:error];
+    }
+}
+
 #pragma mark Property overrides
 
 - (CLLocationManager *)locationManager
