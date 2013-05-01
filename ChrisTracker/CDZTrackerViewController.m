@@ -123,22 +123,22 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
             switch(indexPath.row) {
                 case CDZTrackerTableViewInfoSpeed: {
                     cell.textLabel.text = @"Speed";
-                    NSString *speedStr = @"";
-                    if (self.lastLocation && !self.lastLocation.speed < 0) speedStr = [NSString stringWithFormat:@"%d mph", (int)self.lastLocation.speed];
+                    NSString *speedStr = @"-";
+                    if (self.lastLocation && !(self.lastLocation.speed < 0)) speedStr = [NSString stringWithFormat:@"%d mph", (int)(self.lastLocation.speed*ONE_MPH_IN_KMH)];
                     cell.detailTextLabel.text = speedStr;
                     break;
                 }
                 case CDZTrackerTableViewInfoHeading: {
                     cell.textLabel.text = @"Heading";
-                    NSString *courseStr = @"";
-                    if (self.lastLocation && !self.lastLocation.course < 0) courseStr = [NSString stringWithFormat:@"%d°", (int)self.lastLocation.course];
+                    NSString *courseStr = @"-";
+                    if (self.lastLocation && !(self.lastLocation.course < 0)) courseStr = [NSString stringWithFormat:@"%d°", (int)self.lastLocation.course];
                     cell.detailTextLabel.text = courseStr;
                     break;
                 }
                 case CDZTrackerTableViewInfoLocation: {
                     cell.textLabel.text = @"Location";
                     NSString *locStr = @"";
-                    if (self.lastLocation) locStr = [NSString stringWithFormat:@"%0.3f, %0.3f",
+                    if (self.lastLocation) locStr = [NSString stringWithFormat:@"%0.4f, %0.4f",
                                                      self.lastLocation.coordinate.latitude,
                                                      self.lastLocation.coordinate.longitude
                                                     ];
