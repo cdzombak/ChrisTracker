@@ -92,7 +92,7 @@
     // If the application was previously in the background, optionally refresh the user interface.
 
     self.appIsInForeground = YES;
-    [self.viewController presentQueuedError];
+    [self.viewController presentQueuedMessage];
 
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
@@ -106,7 +106,7 @@
     [[CDZWhereIsChrisAPIClient sharedClient] track:location success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.viewController tracker:tracker didUpdateLocation:location];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self.viewController presentError:error withAppInForeground:self.appIsInForeground];
+        [self.viewController presentMessage:[error localizedDescription] withAppInForeground:self.appIsInForeground];
     }];
 }
 

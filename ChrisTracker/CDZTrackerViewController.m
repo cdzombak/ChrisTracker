@@ -24,7 +24,7 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
 @interface CDZTrackerViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) CLLocation *lastLocation;
-@property (nonatomic, strong) NSError *queuedErrorToPresent;
+@property (nonatomic, strong) NSString *queuedMessageToPresent;
 
 @end
 
@@ -65,32 +65,33 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
     [mapItem openInMapsWithLaunchOptions:nil];
 }
 
-- (void)presentError:(NSError *)error withAppInForeground:(BOOL)inForeground
+- (void)presentMessage:(NSString *)message withAppInForeground:(BOOL)inForeground
 {
-    self.queuedErrorToPresent = error;
+    self.queuedMessageToPresent = message;
     
     if (inForeground) {
-        [self presentQueuedError];
+        [self presentQueuedMessage];
     } else {
         UILocalNotification *localNotif = [[UILocalNotification alloc] init];
         if (localNotif) {
-            localNotif.alertBody = [error localizedDescription];
+            localNotif.alertBody = message;
             [[UIApplication sharedApplication] presentLocalNotificationNow:localNotif];
         }
     }
 }
 
-- (void)presentQueuedError
+- (void)presentQueuedMessage
 {
-    if (!self.queuedErrorToPresent) return;
+    if (!self.queuedMessageToPresent) return;
 
-    [[[UIAlertView alloc] initWithTitle:@"Error"
-                                message:[self.queuedErrorToPresent localizedDescription]
+    [[[UIAlertView alloc] initWithTitle:nil
+                                message:self.queuedMessageToPresent
                                delegate:nil
-                      cancelButtonTitle:@":("
+                      cancelButtonTitle:@"OK"
                       otherButtonTitles:nil]
      show];
-    self.queuedErrorToPresent = nil;
+
+    self.queuedMessageToPresent = nil;
 }
 
 #pragma mark UITableViewDataSource methods
