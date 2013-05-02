@@ -8,8 +8,10 @@
 
 @property (strong, nonatomic) CDZTrackerViewController *viewController;
 @property (strong, nonatomic) CDZTracker *tracker;
+@property (nonatomic, strong) CLLocation *lastLocationUpdate;
 @property (nonatomic, assign, readwrite) BOOL appIsInForeground;
 @property (strong, readonly, nonatomic) NSArray *ignoredErrorCodes;
+@property (nonatomic, strong) NSTimer *minimumUpdateTimer;
 
 @end
 
@@ -28,6 +30,7 @@
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 
     [self setupTracker];
+    [self setupUpdateTimer];
 
     UIDevice *device = [UIDevice currentDevice];
     device.batteryMonitoringEnabled = YES;
@@ -62,6 +65,28 @@
     }
     
     self.viewController.tracker = self.tracker;
+}
+
+- (void)setupUpdateTimer
+{
+    // ensure location is updated at least every 3 minutes while tracking
+    if (!self.minimumUpdateTimer) {
+        self.minimumUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:3.0*60.0
+                                                                   target:self
+                                                                 selector:@selector(updateTimerFired:)
+                                                                 userInfo:nil
+                                                                  repeats:YES
+                                   ];
+    }
+}
+
+- (void)updateTimerFired:(id)sender
+{
+    NSParameterAssert(sender == self.minimumUpdateTimer);
+
+    if (!self.lastLocationUpdate || [self.lastLocationUpdate.timestamp timeIntervalSinceNow] < -3.0*60.0) {
+        if (self.tracker.isLocationTracking) [self.tracker forceLogLatestInfo];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -136,6 +161,7 @@
     
     [[CDZWhereIsChrisAPIClient sharedClient] track:location success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.viewController tracker:tracker didUpdateLocation:location];
+        self.lastLocationUpdate = location;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if ([self.ignoredErrorCodes containsObject:@(error.code)]) return; // really should check domain and code but #YOLO
         [self.viewController presentMessage:[error localizedDescription] withAppInForeground:self.appIsInForeground];
