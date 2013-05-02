@@ -9,10 +9,13 @@
 @property (strong, nonatomic) CDZTrackerViewController *viewController;
 @property (strong, nonatomic) CDZTracker *tracker;
 @property (nonatomic, assign, readwrite) BOOL appIsInForeground;
+@property (strong, readonly, nonatomic) NSArray *ignoredErrorCodes;
 
 @end
 
 @implementation CDZAppDelegate
+
+@synthesize ignoredErrorCodes = _ignoredErrorCodes;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -134,6 +137,7 @@
     [[CDZWhereIsChrisAPIClient sharedClient] track:location success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.viewController tracker:tracker didUpdateLocation:location];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if ([self.ignoredErrorCodes containsObject:@(error.code)]) return; // really should check domain and code but #YOLO
         [self.viewController presentMessage:[error localizedDescription] withAppInForeground:self.appIsInForeground];
     }];
 }
@@ -142,6 +146,19 @@
 {
 //    [self.viewController presentError:error withAppInForeground:self.appIsInForeground];
 //    [self setupTracker];
+}
+
+#pragma mark Property overrides
+
+- (NSArray *)ignoredErrorCodes
+{
+    if (!_ignoredErrorCodes) {
+        _ignoredErrorCodes = @[ @(-1019) ];
+    }
+    return _ignoredErrorCodes;
+
+    // no data when call is active:
+    // kCFURLErrorCallIsActive               = -1019,
 }
 
 @end
