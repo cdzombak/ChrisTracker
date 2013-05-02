@@ -35,15 +35,18 @@
       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+    double measuredSpeed = location.speed * ONE_METER_SECOND_IN_MPH;
+
     NSDictionary *params =
     @{
         @"key": self.apiKey,
-        @"lat": @(location.coordinate.latitude).stringValue,
-        @"lon": @(location.coordinate.longitude).stringValue,
-        @"speed": @(location.speed * ONE_METER_SECOND_IN_MPH).stringValue,
+        @"lat": @(location.coordinate.latitude),
+        @"lon": @(location.coordinate.longitude),
+        @"speed": @(measuredSpeed > 70 ? 70 : measuredSpeed),
         @"speed_unit": @"mph",
-        @"heading": @(location.course).stringValue
+        @"heading": @(location.course)
     };
+    
     [self postPath:@"post.php" parameters:params success:success failure:failure];
 }
 
