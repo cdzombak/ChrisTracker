@@ -8,3 +8,16 @@
 * stops logging when battery reaches 20%
     * alerts you; delivered via UIalert and/or local notification
 * TODO logs currently playing to lastfm in the background
+
+## other
+
+* code is kind of hacky and some best practices are not followed. I wrote this laaaaaate at night in a hurry.
+* not fully tested
+* probably some other stuff I forgot
+
+## Author
+
+Chris Dzombak <[chris.dzombak.name](http://chris.dzombak.name)>
+
+* twitter [@cdzombak](https://twitter.com/cdzombak)
+* ADN [@dzombak](https://alpha.app.net/dzombak)
