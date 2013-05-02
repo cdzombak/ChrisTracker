@@ -40,7 +40,7 @@
         @"key": self.apiKey,
         @"lat": @(location.coordinate.latitude).stringValue,
         @"lon": @(location.coordinate.longitude).stringValue,
-        @"speed": @(location.speed * ONE_MPH_IN_KMH).stringValue,
+        @"speed": @(location.speed * ONE_METER_SECOND_IN_MPH).stringValue,
         @"speed_unit": @"mph",
         @"heading": @(location.course).stringValue
     };

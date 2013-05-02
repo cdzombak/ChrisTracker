@@ -68,7 +68,7 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
     MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
 
     NSString *name = @"Last Logged";
-    CGFloat speedMph = location.speed * ONE_MPH_IN_KMH;
+    CGFloat speedMph = location.speed * ONE_METER_SECOND_IN_MPH;
     if (location.speed > 1) {
         name = [NSString stringWithFormat:@"%@: %d° at %d mph", name, (int)round(location.course), (int)round(speedMph)];
     }
@@ -166,7 +166,7 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
                 case CDZTrackerTableViewInfoSpeed: {
                     cell.textLabel.text = @"Speed";
                     NSString *speedStr = @"-";
-                    if (self.lastLocation && !(self.lastLocation.speed < 0)) speedStr = [NSString stringWithFormat:@"%d mph", (int)(self.lastLocation.speed*ONE_MPH_IN_KMH)];
+                    if (self.lastLocation && !(self.lastLocation.speed < 0)) speedStr = [NSString stringWithFormat:@"%d mph", (int)(self.lastLocation.speed*ONE_METER_SECOND_IN_MPH)];
                     cell.detailTextLabel.text = speedStr;
                     break;
                 }

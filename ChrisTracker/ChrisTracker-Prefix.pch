@@ -14,4 +14,4 @@
 #endif
 
 #define TENTH_MILE_IN_METERS ((CLLocationDistance) 160.934)
-#define ONE_MPH_IN_KMH ((double) 0.621371)
+#define ONE_METER_SECOND_IN_MPH ((double) 2.23694)
