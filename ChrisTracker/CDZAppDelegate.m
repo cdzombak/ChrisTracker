@@ -141,6 +141,7 @@
 
     self.appIsInForeground = YES;
     [self.viewController presentQueuedMessage];
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
 
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
