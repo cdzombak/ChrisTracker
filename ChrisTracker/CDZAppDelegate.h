@@ -2,7 +2,7 @@
 
 @interface CDZAppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
-@property (nonatomic, assign, readonly) BOOL appIsInForeground;
+@property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, readonly) BOOL appIsInForeground;
 
 @end

@@ -12,8 +12,6 @@
 - (void)stopLocationTracking;
 - (void)forceLogLatestInfo;
 
-// TODO battery monitoring callbacks
-
 @end
 
 @protocol CDZTrackerDelegate <NSObject>

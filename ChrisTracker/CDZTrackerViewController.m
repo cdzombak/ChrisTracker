@@ -30,6 +30,8 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
 
 @implementation CDZTrackerViewController
 
+#pragma mark Initialization/lifecycle
+
 - (id)init
 {
     self = [super initWithStyle:UITableViewStyleGrouped];
@@ -48,10 +50,7 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
     [self.navigationController.navigationBar addGestureRecognizer:gr];
 }
 
-- (void)navBarDoubleTapped:(id)sender
-{
-    [self presentMessage:@"NavBar double-tapped" withAppInForeground:NO];
-}
+#pragma mark Tracker callbacks
 
 - (void)tracker:(CDZTracker *)tracker didUpdateLocation:(CLLocation *)location
 {
@@ -59,6 +58,13 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
 
     self.lastLocation = location;
     [self.tableView reloadData];
+}
+
+#pragma mark UI Actions
+
+- (void)navBarDoubleTapped:(id)sender
+{
+    [self presentMessage:@"NavBar double-tapped" withAppInForeground:NO];
 }
 
 - (void)openMapForLocation:(CLLocation *)location
@@ -80,6 +86,8 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
 
     [mapItem openInMapsWithLaunchOptions:nil];
 }
+
+#pragma mark Notification/Alert Management
 
 - (void)presentMessage:(NSString *)message withAppInForeground:(BOOL)inForeground
 {

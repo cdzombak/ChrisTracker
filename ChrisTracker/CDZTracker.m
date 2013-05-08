@@ -2,7 +2,7 @@
 
 @interface CDZTracker () <CLLocationManagerDelegate>
 
-@property (nonatomic, readonly, strong) CLLocationManager *locationManager;
+@property (nonatomic, readonly) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSDate *lastUpdateReceived;
 @property (nonatomic, readwrite, assign) BOOL isLocationTracking;
 
@@ -11,6 +11,8 @@
 @implementation CDZTracker
 
 @synthesize locationManager = _locationManager;
+
+#pragma mark Initialization/lifecycle/notifications
 
 - (id)init
 {
@@ -33,6 +35,8 @@
     [self configureLocationManagerForCurrentBatteryState];
 }
 
+#pragma mark Client API methods
+
 - (void)startLocationTracking
 {
     self.locationManager.delegate = self;
@@ -53,6 +57,8 @@
     [self.locationManager stopUpdatingLocation];
     [self.locationManager startUpdatingLocation];
 }
+
+#pragma mark Battery Management
 
 - (void)configureLocationManagerForCurrentBatteryState
 {

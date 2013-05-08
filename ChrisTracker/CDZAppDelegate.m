@@ -6,18 +6,22 @@
 
 @interface CDZAppDelegate () <CDZTrackerDelegate>
 
-@property (strong, nonatomic) CDZTrackerViewController *viewController;
-@property (strong, nonatomic) CDZTracker *tracker;
-@property (nonatomic, strong) CLLocation *lastLocationUpdate;
+@property (nonatomic, strong) CDZTrackerViewController *viewController;
 @property (nonatomic, assign, readwrite) BOOL appIsInForeground;
-@property (strong, readonly, nonatomic) NSArray *ignoredErrorCodes;
+
+@property (nonatomic, strong) CDZTracker *tracker;
+@property (nonatomic, strong) CLLocation *lastLocationUpdate;
 @property (nonatomic, strong) NSTimer *minimumUpdateTimer;
+
+@property (nonatomic, readonly) NSArray *ignoredErrorCodes;
 
 @end
 
 @implementation CDZAppDelegate
 
 @synthesize ignoredErrorCodes = _ignoredErrorCodes;
+
+#pragma mark Lifecycle/callbacks/notifications
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -48,32 +52,6 @@
     if (batterylevel <= 0.2 && batterylevel >= 0) {
         [self.tracker stopLocationTracking];
         [self displayBatteryWarning];
-    }
-}
-
-- (void)setupTracker
-{
-    self.tracker = [[CDZTracker alloc] init];
-    self.tracker.delegate = self;
-    
-    CGFloat batterylevel = [UIDevice currentDevice].batteryLevel;
-    if (batterylevel <= 0.2 && batterylevel >= 0) {
-        [self displayBatteryWarning];
-    }
-    
-    self.viewController.tracker = self.tracker;
-}
-
-- (void)setupUpdateTimer
-{
-    // ensure location is updated at least every 3 minutes while tracking
-    if (!self.minimumUpdateTimer) {
-        self.minimumUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:3.0*60.0
-                                                                   target:self
-                                                                 selector:@selector(updateTimerFired:)
-                                                                 userInfo:nil
-                                                                  repeats:YES
-                                   ];
     }
 }
 
@@ -146,6 +124,36 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
+#pragma mark Initialization
+
+- (void)setupTracker
+{
+    self.tracker = [[CDZTracker alloc] init];
+    self.tracker.delegate = self;
+
+    CGFloat batterylevel = [UIDevice currentDevice].batteryLevel;
+    if (batterylevel <= 0.2 && batterylevel >= 0) {
+        [self displayBatteryWarning];
+    }
+
+    self.viewController.tracker = self.tracker;
+}
+
+- (void)setupUpdateTimer
+{
+    // ensure location is updated at least every 3 minutes while tracking
+    if (!self.minimumUpdateTimer) {
+        self.minimumUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:3.0*60.0
+                                                                   target:self
+                                                                 selector:@selector(updateTimerFired:)
+                                                                 userInfo:nil
+                                                                  repeats:YES
+                                   ];
+    }
+}
+
+#pragma mark UI and Notifications
+
 - (void)displayBatteryWarning
 {
     [self.viewController presentMessage:@"Tracking is disabled while battery < 20%"
@@ -169,12 +177,6 @@
                                                                withAppInForeground:self.appIsInForeground];
                                            }
      ];
-}
-
-- (void)tracker:(CDZTracker *)tracker didEncounterError:(NSError *)error
-{
-//    [self.viewController presentError:error withAppInForeground:self.appIsInForeground];
-//    [self setupTracker];
 }
 
 #pragma mark Property overrides
