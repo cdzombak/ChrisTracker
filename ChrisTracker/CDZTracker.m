@@ -58,10 +58,10 @@
 {
     UIDeviceBatteryState batteryState = [[UIDevice currentDevice] batteryState];
     if (batteryState == UIDeviceBatteryStateUnknown || batteryState == UIDeviceBatteryStateUnplugged) {
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
         self.locationManager.distanceFilter = 2*TENTH_MILE_IN_METERS;
     } else { // charging || full
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
         self.locationManager.distanceFilter = TENTH_MILE_IN_METERS;
     }
 }
