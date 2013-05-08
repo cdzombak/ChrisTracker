@@ -35,14 +35,14 @@
       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
-    double measuredSpeed = location.speed * ONE_METER_SECOND_IN_MPH;
+    double measuredSpeedMph = location.speed * ONE_METER_SECOND_IN_MPH;
 
     NSDictionary *params =
     @{
         @"key": self.apiKey,
         @"lat": @(location.coordinate.latitude),
         @"lon": @(location.coordinate.longitude),
-        @"speed": @(measuredSpeed > 70 ? 70 : measuredSpeed),
+        @"speed": @(measuredSpeedMph),
         @"speed_unit": @"mph",
         @"heading": @(location.course)
     };
