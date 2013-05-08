@@ -39,7 +39,6 @@
                                                  name:UIDeviceBatteryLevelDidChangeNotification
                                                object:device];
 
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     return YES;
 }
 
