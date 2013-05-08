@@ -21,14 +21,14 @@
         UIDevice *device = [UIDevice currentDevice];
         device.batteryMonitoringEnabled = YES;
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(batteryChanged:)
+                                                 selector:@selector(batteryStateChanged:)
                                                      name:UIDeviceBatteryStateDidChangeNotification
                                                    object:device];
     }
     return self;
 }
 
-- (void)batteryChanged:(NSNotification *)notification
+- (void)batteryStateChanged:(NSNotification *)notification
 {
     [self configureLocationManagerForCurrentBatteryState];
 }
