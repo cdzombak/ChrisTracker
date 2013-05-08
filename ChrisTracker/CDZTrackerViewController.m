@@ -178,14 +178,14 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
             switch(indexPath.row) {
                 case CDZTrackerTableViewInfoSpeed: {
                     cell.textLabel.text = @"Speed";
-                    NSString *speedStr = @"-";
+                    NSString *speedStr = @"";
                     if (self.lastLocation && !(self.lastLocation.speed < 0)) speedStr = [NSString stringWithFormat:@"%d mph", (int)(self.lastLocation.speed*ONE_METER_SECOND_IN_MPH)];
                     cell.detailTextLabel.text = speedStr;
                     break;
                 }
                 case CDZTrackerTableViewInfoHeading: {
                     cell.textLabel.text = @"Heading";
-                    NSString *courseStr = @"-";
+                    NSString *courseStr = @"";
                     if (self.lastLocation && !(self.lastLocation.course < 0)) courseStr = [NSString stringWithFormat:@"%d°", (int)self.lastLocation.course];
                     cell.detailTextLabel.text = courseStr;
                     break;
