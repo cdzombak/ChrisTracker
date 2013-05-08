@@ -142,10 +142,10 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
     };
     UITableViewCellStyle style = indexPath.section == CDZTrackerTableViewSectionStatus ? UITableViewCellStyleSubtitle : UITableViewCellStyleValue2;
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:style reuseIdentifier:CellIdentifiers[indexPath.section]];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
     switch(indexPath.section) {
         case CDZTrackerTableViewSectionStatus:
+            cell.accessoryType = UITableViewCellAccessoryNone;
             switch(indexPath.row) {
                 case CDZTrackerTableViewStatusStartStopLogging: {
                     cell.textLabel.text = self.tracker.isLocationTracking ? @"Tracking Now…" : @"Start Tracking";
@@ -154,18 +154,19 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
                 }
                 case CDZTrackerTableViewStatusForceLog: {
                     NSString *lastLogDate = @"";
-                    if (self.lastLocation) lastLogDate = [NSString stringWithFormat:@"Updated %@",
+                    if (self.lastLocation) lastLogDate = [NSString stringWithFormat:@"Last Track: %@",
                                                           [NSDateFormatter localizedStringFromDate:self.lastLocation.timestamp
                                                                                          dateStyle:NSDateFormatterShortStyle
                                                                                          timeStyle:NSDateFormatterShortStyle]
                                                           ];
                     cell.textLabel.text = lastLogDate;
-                    cell.detailTextLabel.text = @"Tap to track & log now";
+                    cell.detailTextLabel.text = @"Tap to track now";
                     break;
                 }
             }
             break;
         case CDZTrackerTableViewSectionInfo:
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             switch(indexPath.row) {
                 case CDZTrackerTableViewInfoSpeed: {
                     cell.textLabel.text = @"Speed";
