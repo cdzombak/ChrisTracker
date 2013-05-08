@@ -67,11 +67,15 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
                                                    addressDictionary:nil];
     MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
 
-    NSString *name = @"Last Logged";
+    NSString *name = [NSDateFormatter localizedStringFromDate:location.timestamp
+                                                    dateStyle:NSDateFormatterShortStyle
+                                                    timeStyle:NSDateFormatterShortStyle];
+    
     CGFloat speedMph = location.speed * ONE_METER_SECOND_IN_MPH;
-    if (location.speed > 1) {
+    if (speedMph > 1) {
         name = [NSString stringWithFormat:@"%@: %d° at %d mph", name, (int)round(location.course), (int)round(speedMph)];
     }
+    
     mapItem.name = name;
 
     [mapItem openInMapsWithLaunchOptions:nil];
