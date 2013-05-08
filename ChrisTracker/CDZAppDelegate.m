@@ -59,8 +59,6 @@
     CGFloat batterylevel = [UIDevice currentDevice].batteryLevel;
     if (batterylevel <= 0.2 && batterylevel >= 0) {
         [self displayBatteryWarning];
-    } else {
-        [self.tracker startLocationTracking];
     }
     
     self.viewController.tracker = self.tracker;
