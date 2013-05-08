@@ -23,9 +23,9 @@
 {
     self = [super initWithBaseURL:[NSURL URLWithString:@"http://whereischris.me"]];
     if (self) {
-        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"apikey" ofType:@"plist"];
+        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"auth" ofType:@"plist"];
         NSDictionary *keyDict = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-        self.apiKey = keyDict[@"key"];
+        self.apiKey = keyDict[@"whereischris_key"];
     }
     return self;
 }
