@@ -123,7 +123,7 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
     NSParameterAssert(tableView == self.tableView);
     switch(section) {
         case CDZTrackerTableViewSectionStatus:
-            return CDZTrackerTableViewStatusNumRows;
+            return (self.tracker.isLocationTracking) ? CDZTrackerTableViewStatusNumRows : 1; // hack
         case CDZTrackerTableViewSectionInfo:
             return CDZTrackerTableViewInfoNumRows;
         default:
@@ -232,7 +232,8 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
             case CDZTrackerTableViewStatusStartStopLogging:
                 if (self.tracker.isLocationTracking) [self.tracker stopLocationTracking];
                 else [self.tracker startLocationTracking];
-                [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                [tableView reloadSections:[NSIndexSet indexSetWithIndex:CDZTrackerTableViewSectionStatus]
+                         withRowAnimation:UITableViewRowAnimationAutomatic];
                 break;
             case CDZTrackerTableViewStatusForceLog:
                 if (!self.tracker.isLocationTracking) [self.tracker startLocationTracking];
