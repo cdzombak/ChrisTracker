@@ -147,7 +147,8 @@
 
 - (void)displayBatteryWarning
 {
-    [self.viewController presentMessage:@"Tracking is disabled while battery < 20%" withAppInForeground:self.appIsInForeground];
+    [self.viewController presentMessage:@"Tracking is disabled while battery < 20%"
+                    withAppInForeground:self.appIsInForeground];
 }
 
 #pragma mark CDZTrackerDelegate methods
@@ -156,13 +157,17 @@
 {
     NSParameterAssert(tracker == self.tracker);
     
-    [[CDZWhereIsChrisAPIClient sharedClient] track:location success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self.viewController tracker:tracker didUpdateLocation:location];
-        self.lastLocationUpdate = location;
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if ([self.ignoredErrorCodes containsObject:@(error.code)]) return; // really should check domain and code but #YOLO
-        [self.viewController presentMessage:[error localizedDescription] withAppInForeground:self.appIsInForeground];
-    }];
+    [[CDZWhereIsChrisAPIClient sharedClient] track:location
+                                           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                               [self.viewController tracker:tracker didUpdateLocation:location];
+                                               self.lastLocationUpdate = location;
+                                           }
+                                           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                               if ([self.ignoredErrorCodes containsObject:@(error.code)]) return; // really should check domain and code but #YOLO
+                                               [self.viewController presentMessage:[error localizedDescription]
+                                                               withAppInForeground:self.appIsInForeground];
+                                           }
+     ];
 }
 
 - (void)tracker:(CDZTracker *)tracker didEncounterError:(NSError *)error
@@ -175,13 +180,13 @@
 
 - (NSArray *)ignoredErrorCodes
 {
+    // no data when call is active:
+    // kCFURLErrorCallIsActive = -1019,
+
     if (!_ignoredErrorCodes) {
         _ignoredErrorCodes = @[ @(-1019) ];
     }
     return _ignoredErrorCodes;
-
-    // no data when call is active:
-    // kCFURLErrorCallIsActive               = -1019,
 }
 
 @end
