@@ -36,7 +36,7 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
 {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
-        self.title = @"ChrisTracker 3000";
+        self.title = @"ChrisTracker";
     }
     return self;
 }
