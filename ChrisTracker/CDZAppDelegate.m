@@ -124,6 +124,14 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
+{
+    [self.viewController presentMessage:@"Memory warning received"
+                    withAppInForeground:self.appIsInForeground];
+
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
 #pragma mark Initialization
 
 - (void)setupTracker
