@@ -222,7 +222,7 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
     
     switch(section) {
         case CDZTrackerTableViewSectionStatus:
-            return nil;
+            return @"Control";
         case CDZTrackerTableViewSectionInfo:
             return @"Last Logged Track";
     }
