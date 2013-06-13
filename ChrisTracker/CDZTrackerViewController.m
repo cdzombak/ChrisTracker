@@ -174,7 +174,8 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
             }
             break;
         case CDZTrackerTableViewSectionInfo:
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.accessoryType = self.lastLocation ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
+
             switch(indexPath.row) {
                 case CDZTrackerTableViewInfoSpeed: {
                     cell.textLabel.text = @"Speed";
@@ -235,7 +236,7 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
     NSParameterAssert(tableView == self.tableView);
 
     if (indexPath.section == CDZTrackerTableViewSectionInfo) {
-        [self openMapForLocation:self.lastLocation];
+        if (self.lastLocation) [self openMapForLocation:self.lastLocation];
     } else {
         switch (indexPath.row) {
             case CDZTrackerTableViewStatusStartStopLogging:
