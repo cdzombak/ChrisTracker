@@ -48,6 +48,12 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
     UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navBarDoubleTapped:)];
     gr.numberOfTapsRequired = 2;
     [self.navigationController.navigationBar addGestureRecognizer:gr];
+
+    // Uncomment when making a launch image:
+//    UIImage *arrowImage = [UIImage imageNamed:@"arrow"];
+//    UIImageView *v = [[UIImageView alloc] initWithImage:arrowImage];
+//    [self.view addSubview:v];
+//    v.frame = CGRectMake(self.view.bounds.size.width/2-arrowImage.size.width/2-10, 70, arrowImage.size.width, arrowImage.size.height);
 }
 
 #pragma mark Tracker callbacks

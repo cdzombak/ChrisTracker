@@ -7,30 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		834AB6F4176A1D0900FC6069 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 834AB6F2176A1D0900FC6069 /* arrow.png */; };
+		834AB6F5176A1D0900FC6069 /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 834AB6F3176A1D0900FC6069 /* arrow@2x.png */; };
+		834AB6F7176A1F7100FC6069 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 834AB6F6176A1F7100FC6069 /* Media.xcassets */; };
 		837C01411730BA2600637EE2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 837C01401730BA2600637EE2 /* UIKit.framework */; };
 		837C01431730BA2600637EE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 837C01421730BA2600637EE2 /* Foundation.framework */; };
 		837C01451730BA2600637EE2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 837C01441730BA2600637EE2 /* CoreGraphics.framework */; };
 		837C014B1730BA2600637EE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 837C01491730BA2600637EE2 /* InfoPlist.strings */; };
 		837C014D1730BA2600637EE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C014C1730BA2600637EE2 /* main.m */; };
 		837C01511730BA2600637EE2 /* CDZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C01501730BA2600637EE2 /* CDZAppDelegate.m */; };
-		837C01531730BA2600637EE2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 837C01521730BA2600637EE2 /* Default.png */; };
-		837C01551730BA2600637EE2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 837C01541730BA2600637EE2 /* Default@2x.png */; };
-		837C01571730BA2600637EE2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 837C01561730BA2600637EE2 /* Default-568h@2x.png */; };
 		837C015A1730BA2600637EE2 /* CDZTrackerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C01591730BA2600637EE2 /* CDZTrackerViewController.m */; };
 		837C01651731556500637EE2 /* CDZTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C01641731556500637EE2 /* CDZTracker.m */; };
 		837C01671731557A00637EE2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 837C01661731557A00637EE2 /* CoreLocation.framework */; };
 		837C016A17318CA100637EE2 /* CDZWhereIsChrisAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C016917318CA100637EE2 /* CDZWhereIsChrisAPIClient.m */; };
 		837C016C1731937800637EE2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 837C016B1731937800637EE2 /* MapKit.framework */; };
 		837C016E173196DE00637EE2 /* auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 837C016D173196DE00637EE2 /* auth.plist */; };
-		837C01821731C00200637EE2 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 837C01801731C00200637EE2 /* Icon-Small.png */; };
-		837C01831731C00200637EE2 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 837C01811731C00200637EE2 /* Icon-Small@2x.png */; };
-		837C01861731C01300637EE2 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 837C01841731C01300637EE2 /* Icon.png */; };
-		837C01871731C01300637EE2 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 837C01851731C01300637EE2 /* Icon@2x.png */; };
 		B36CF648ED574F96B8DB62C4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48796A2D746C48A891642350 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		48796A2D746C48A891642350 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		834AB6F2176A1D0900FC6069 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		834AB6F3176A1D0900FC6069 /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@2x.png"; sourceTree = "<group>"; };
+		834AB6F6176A1F7100FC6069 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = ChrisTracker/Media.xcassets; sourceTree = "<group>"; };
 		837C013D1730BA2600637EE2 /* ChrisTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChrisTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		837C01401730BA2600637EE2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		837C01421730BA2600637EE2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -41,9 +40,6 @@
 		837C014E1730BA2600637EE2 /* ChrisTracker-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ChrisTracker-Prefix.pch"; sourceTree = "<group>"; };
 		837C014F1730BA2600637EE2 /* CDZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDZAppDelegate.h; sourceTree = "<group>"; };
 		837C01501730BA2600637EE2 /* CDZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDZAppDelegate.m; sourceTree = "<group>"; };
-		837C01521730BA2600637EE2 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		837C01541730BA2600637EE2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		837C01561730BA2600637EE2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		837C01581730BA2600637EE2 /* CDZTrackerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDZTrackerViewController.h; sourceTree = "<group>"; };
 		837C01591730BA2600637EE2 /* CDZTrackerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDZTrackerViewController.m; sourceTree = "<group>"; };
 		837C01631731556500637EE2 /* CDZTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDZTracker.h; sourceTree = "<group>"; };
@@ -53,10 +49,6 @@
 		837C016917318CA100637EE2 /* CDZWhereIsChrisAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDZWhereIsChrisAPIClient.m; sourceTree = "<group>"; };
 		837C016B1731937800637EE2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		837C016D173196DE00637EE2 /* auth.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = auth.plist; sourceTree = "<group>"; };
-		837C01801731C00200637EE2 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small.png"; path = "../icon/product/Icon-Small.png"; sourceTree = "<group>"; };
-		837C01811731C00200637EE2 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small@2x.png"; path = "../icon/product/Icon-Small@2x.png"; sourceTree = "<group>"; };
-		837C01841731C01300637EE2 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../icon/product/Icon.png; sourceTree = "<group>"; };
-		837C01851731C01300637EE2 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../icon/product/Icon@2x.png"; sourceTree = "<group>"; };
 		DBF7E2972E8E49A5B159AA93 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -77,12 +69,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		834AB6F8176A222800FC6069 /* Images - Temp for Launch Image */ = {
+			isa = PBXGroup;
+			children = (
+				834AB6F2176A1D0900FC6069 /* arrow.png */,
+				834AB6F3176A1D0900FC6069 /* arrow@2x.png */,
+			);
+			name = "Images - Temp for Launch Image";
+			sourceTree = "<group>";
+		};
 		837C01341730BA2600637EE2 = {
 			isa = PBXGroup;
 			children = (
 				837C01461730BA2600637EE2 /* ChrisTracker */,
 				837C013F1730BA2600637EE2 /* Frameworks */,
 				837C013E1730BA2600637EE2 /* Products */,
+				834AB6F6176A1F7100FC6069 /* Media.xcassets */,
 				DBF7E2972E8E49A5B159AA93 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
@@ -120,6 +122,7 @@
 				837C016817318CA100637EE2 /* CDZWhereIsChrisAPIClient.h */,
 				837C016917318CA100637EE2 /* CDZWhereIsChrisAPIClient.m */,
 				837C01471730BA2600637EE2 /* Supporting Files */,
+				834AB6F8176A222800FC6069 /* Images - Temp for Launch Image */,
 			);
 			path = ChrisTracker;
 			sourceTree = "<group>";
@@ -131,13 +134,6 @@
 				837C01491730BA2600637EE2 /* InfoPlist.strings */,
 				837C014C1730BA2600637EE2 /* main.m */,
 				837C014E1730BA2600637EE2 /* ChrisTracker-Prefix.pch */,
-				837C01521730BA2600637EE2 /* Default.png */,
-				837C01541730BA2600637EE2 /* Default@2x.png */,
-				837C01561730BA2600637EE2 /* Default-568h@2x.png */,
-				837C01841731C01300637EE2 /* Icon.png */,
-				837C01851731C01300637EE2 /* Icon@2x.png */,
-				837C01801731C00200637EE2 /* Icon-Small.png */,
-				837C01811731C00200637EE2 /* Icon-Small@2x.png */,
 				837C016D173196DE00637EE2 /* auth.plist */,
 			);
 			name = "Supporting Files";
@@ -198,14 +194,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				837C014B1730BA2600637EE2 /* InfoPlist.strings in Resources */,
-				837C01531730BA2600637EE2 /* Default.png in Resources */,
-				837C01551730BA2600637EE2 /* Default@2x.png in Resources */,
-				837C01571730BA2600637EE2 /* Default-568h@2x.png in Resources */,
+				834AB6F5176A1D0900FC6069 /* arrow@2x.png in Resources */,
+				834AB6F4176A1D0900FC6069 /* arrow.png in Resources */,
 				837C016E173196DE00637EE2 /* auth.plist in Resources */,
-				837C01821731C00200637EE2 /* Icon-Small.png in Resources */,
-				837C01831731C00200637EE2 /* Icon-Small@2x.png in Resources */,
-				837C01861731C01300637EE2 /* Icon.png in Resources */,
-				837C01871731C01300637EE2 /* Icon@2x.png in Resources */,
+				834AB6F7176A1F7100FC6069 /* Media.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +321,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DBF7E2972E8E49A5B159AA93 /* Pods.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ChrisTracker/ChrisTracker-Prefix.pch";
 				INFOPLIST_FILE = "ChrisTracker/ChrisTracker-Info.plist";
@@ -341,6 +335,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DBF7E2972E8E49A5B159AA93 /* Pods.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ChrisTracker/ChrisTracker-Prefix.pch";
 				INFOPLIST_FILE = "ChrisTracker/ChrisTracker-Info.plist";
