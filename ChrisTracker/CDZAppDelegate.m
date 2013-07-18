@@ -15,6 +15,8 @@
 
 @property (nonatomic, readonly) NSArray *ignoredErrorCodes;
 
+@property (nonatomic, readonly) NSTimeInterval forceUpdateInterval;
+
 @end
 
 @implementation CDZAppDelegate
@@ -59,7 +61,7 @@
 {
     NSParameterAssert(sender == self.minimumUpdateTimer);
 
-    if (!self.lastLocationUpdate || [self.lastLocationUpdate.timestamp timeIntervalSinceNow] < -3.0*60.0) {
+    if (!self.lastLocationUpdate || [self.lastLocationUpdate.timestamp timeIntervalSinceNow] < -self.forceUpdateInterval) {
         if (self.tracker.isLocationTracking) [self.tracker forceLogLatestInfo];
     }
 }
@@ -151,7 +153,7 @@
 {
     // ensure location is updated at least every 3 minutes while tracking
     if (!self.minimumUpdateTimer) {
-        self.minimumUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:3.0*60.0
+        self.minimumUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:self.forceUpdateInterval
                                                                    target:self
                                                                  selector:@selector(updateTimerFired:)
                                                                  userInfo:nil
@@ -198,6 +200,11 @@
         _ignoredErrorCodes = @[ @(-1019) ];
     }
     return _ignoredErrorCodes;
+}
+
+- (NSTimeInterval)forceUpdateInterval
+{
+    return 3.0 * 60.0; // 3 minutes
 }
 
 @end
