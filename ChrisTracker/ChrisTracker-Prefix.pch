@@ -15,3 +15,5 @@
 
 #define TENTH_MILE_IN_METERS ((CLLocationDistance) 160.934)
 #define ONE_METER_SECOND_IN_MPH ((double) 2.23694)
+
+#define LAUNCH_IMAGE_MODE false

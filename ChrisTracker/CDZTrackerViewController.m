@@ -36,7 +36,9 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
 {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
+#if !LAUNCH_IMAGE_MODE
         self.title = @"ChrisTracker";
+#endif
     }
     return self;
 }
@@ -49,11 +51,12 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
     gr.numberOfTapsRequired = 2;
     [self.navigationController.navigationBar addGestureRecognizer:gr];
 
-    // Uncomment when making a launch image:
-//    UIImage *arrowImage = [UIImage imageNamed:@"arrow"];
-//    UIImageView *v = [[UIImageView alloc] initWithImage:arrowImage];
-//    [self.view addSubview:v];
-//    v.frame = CGRectMake(self.view.bounds.size.width/2-arrowImage.size.width/2-10, 70, arrowImage.size.width, arrowImage.size.height);
+#if LAUNCH_IMAGE_MODE
+    UIImage *arrowImage = [UIImage imageNamed:@"arrow"];
+    UIImageView *v = [[UIImageView alloc] initWithImage:arrowImage];
+    [self.view addSubview:v];
+    v.frame = CGRectMake(self.view.bounds.size.width/2-arrowImage.size.width/2-10, 70, arrowImage.size.width, arrowImage.size.height);
+#endif
 }
 
 #pragma mark Tracker callbacks
@@ -129,12 +132,20 @@ typedef NS_ENUM(NSUInteger, CDZTrackerTableViewInfoRows) {
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSParameterAssert(tableView == self.tableView);
+#if LAUNCH_IMAGE_MODE
+    return 0;
+#endif
+
     return CDZTrackerTableViewNumSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSParameterAssert(tableView == self.tableView);
+#if LAUNCH_IMAGE_MODE
+    return 0;
+#endif
+
     switch(section) {
         case CDZTrackerTableViewSectionStatus:
             return (self.tracker.isLocationTracking) ? CDZTrackerTableViewStatusNumRows : 1; // hack
