@@ -100,7 +100,7 @@
         UILocalNotification *localNotif = [[UILocalNotification alloc] init];
         if (localNotif) {
             localNotif.alertBody = @"ChrisTracker has died and is no longer tracking you.";
-            localNotif.alertAction = @"Open ChrisTracker to restart tracking";
+            localNotif.alertAction = @"Reopen ChrisTracker to restart tracking";
             [application presentLocalNotificationNow:localNotif];
         }
     }
