@@ -22,6 +22,8 @@
 		837C016A17318CA100637EE2 /* CDZWhereIsChrisAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C016917318CA100637EE2 /* CDZWhereIsChrisAPIClient.m */; };
 		837C016C1731937800637EE2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 837C016B1731937800637EE2 /* MapKit.framework */; };
 		837C016E173196DE00637EE2 /* auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 837C016D173196DE00637EE2 /* auth.plist */; };
+		83F92B461798642F0022F495 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F92B451798642E0022F495 /* MediaPlayer.framework */; };
+		83F92B4717986A410022F495 /* CDZMusicTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F92B441798640E0022F495 /* CDZMusicTracker.m */; };
 		B36CF648ED574F96B8DB62C4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48796A2D746C48A891642350 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +51,9 @@
 		837C016917318CA100637EE2 /* CDZWhereIsChrisAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDZWhereIsChrisAPIClient.m; sourceTree = "<group>"; };
 		837C016B1731937800637EE2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		837C016D173196DE00637EE2 /* auth.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = auth.plist; sourceTree = "<group>"; };
+		83F92B431798640E0022F495 /* CDZMusicTracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDZMusicTracker.h; sourceTree = "<group>"; };
+		83F92B441798640E0022F495 /* CDZMusicTracker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDZMusicTracker.m; sourceTree = "<group>"; };
+		83F92B451798642E0022F495 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		DBF7E2972E8E49A5B159AA93 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -57,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83F92B461798642F0022F495 /* MediaPlayer.framework in Frameworks */,
 				837C016C1731937800637EE2 /* MapKit.framework in Frameworks */,
 				837C01671731557A00637EE2 /* CoreLocation.framework in Frameworks */,
 				837C01411730BA2600637EE2 /* UIKit.framework in Frameworks */,
@@ -100,6 +106,7 @@
 		837C013F1730BA2600637EE2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				83F92B451798642E0022F495 /* MediaPlayer.framework */,
 				837C016B1731937800637EE2 /* MapKit.framework */,
 				837C01661731557A00637EE2 /* CoreLocation.framework */,
 				837C01401730BA2600637EE2 /* UIKit.framework */,
@@ -115,6 +122,8 @@
 			children = (
 				837C014F1730BA2600637EE2 /* CDZAppDelegate.h */,
 				837C01501730BA2600637EE2 /* CDZAppDelegate.m */,
+				83F92B431798640E0022F495 /* CDZMusicTracker.h */,
+				83F92B441798640E0022F495 /* CDZMusicTracker.m */,
 				837C01631731556500637EE2 /* CDZTracker.h */,
 				837C01641731556500637EE2 /* CDZTracker.m */,
 				837C01581730BA2600637EE2 /* CDZTrackerViewController.h */,
@@ -239,6 +248,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83F92B4717986A410022F495 /* CDZMusicTracker.m in Sources */,
 				837C014D1730BA2600637EE2 /* main.m in Sources */,
 				837C01511730BA2600637EE2 /* CDZAppDelegate.m in Sources */,
 				837C015A1730BA2600637EE2 /* CDZTrackerViewController.m in Sources */,

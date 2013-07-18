@@ -1,10 +1,11 @@
 #import "CDZAppDelegate.h"
+#import "CDZMusicTracker.h"
 #import "CDZTracker.h"
 #import "CDZTrackerViewController.h"
 #import "CDZWhereIsChrisAPIClient.h"
 #import "AFNetworkActivityIndicatorManager.h"
 
-@interface CDZAppDelegate () <CDZTrackerDelegate>
+@interface CDZAppDelegate () <CDZTrackerDelegate, CDZMusicTrackerDelegate>
 
 @property (nonatomic, strong) CDZTrackerViewController *viewController;
 @property (nonatomic, assign, readwrite) BOOL appIsInForeground;
@@ -12,6 +13,9 @@
 @property (nonatomic, strong) CDZTracker *tracker;
 @property (nonatomic, strong) CLLocation *lastLocationUpdate;
 @property (nonatomic, strong) NSTimer *minimumUpdateTimer;
+
+@property (nonatomic, strong) CDZMusicTracker *musicTracker;
+@property (nonatomic, strong) MPMediaItem *lastPlayingItem;
 
 @property (nonatomic, readonly) NSArray *ignoredErrorCodes;
 
@@ -38,6 +42,7 @@
     [self setupTracker];
     [self setupUpdateTimer];
     [self setupBatteryMonitor];
+    [self setupMusicTracker];
 
     return YES;
 }
@@ -148,6 +153,15 @@
                                                object:device];
 }
 
+- (void)setupMusicTracker
+{
+    self.musicTracker = [[CDZMusicTracker alloc] init];
+    self.musicTracker.delegate = self;
+
+    // for now:
+    [self.musicTracker startMusicTracking];
+}
+
 #pragma mark Notifications
 
 - (void)batteryLevelChanged:(NSNotification *)notification
@@ -193,6 +207,14 @@
                                                                withAppInForeground:self.appIsInForeground];
                                            }
      ];
+}
+
+#pragma mark CDZMusicTrackerDelegate
+
+- (void)musicTracker:(CDZMusicTracker *)tracker didUpdateNowPlayingItem:(MPMediaItem *)nowPlayingItem
+{
+    [self.viewController presentMessage:[nowPlayingItem valueForProperty:MPMediaItemPropertyTitle]
+                    withAppInForeground:self.appIsInForeground];
 }
 
 #pragma mark Property overrides
