@@ -24,6 +24,8 @@
 		837C016E173196DE00637EE2 /* auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 837C016D173196DE00637EE2 /* auth.plist */; };
 		83F92B461798642F0022F495 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F92B451798642E0022F495 /* MediaPlayer.framework */; };
 		83F92B4717986A410022F495 /* CDZMusicTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F92B441798640E0022F495 /* CDZMusicTracker.m */; };
+		83F92B5B1798762B0022F495 /* SMKLastFMClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F92B5A1798762B0022F495 /* SMKLastFMClient.m */; };
+		83F92B5E179876AB0022F495 /* NSString+SMKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F92B5D179876AB0022F495 /* NSString+SMKAdditions.m */; };
 		B36CF648ED574F96B8DB62C4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48796A2D746C48A891642350 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +56,12 @@
 		83F92B431798640E0022F495 /* CDZMusicTracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDZMusicTracker.h; sourceTree = "<group>"; };
 		83F92B441798640E0022F495 /* CDZMusicTracker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDZMusicTracker.m; sourceTree = "<group>"; };
 		83F92B451798642E0022F495 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		83F92B57179874060022F495 /* CDZLastFMScrobbler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDZLastFMScrobbler.h; sourceTree = "<group>"; };
+		83F92B58179874060022F495 /* CDZLastFMScrobbler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDZLastFMScrobbler.m; sourceTree = "<group>"; };
+		83F92B591798762B0022F495 /* SMKLastFMClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMKLastFMClient.h; sourceTree = "<group>"; };
+		83F92B5A1798762B0022F495 /* SMKLastFMClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMKLastFMClient.m; sourceTree = "<group>"; };
+		83F92B5C179876AB0022F495 /* NSString+SMKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SMKAdditions.h"; sourceTree = "<group>"; };
+		83F92B5D179876AB0022F495 /* NSString+SMKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SMKAdditions.m"; sourceTree = "<group>"; };
 		DBF7E2972E8E49A5B159AA93 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -122,6 +130,8 @@
 			children = (
 				837C014F1730BA2600637EE2 /* CDZAppDelegate.h */,
 				837C01501730BA2600637EE2 /* CDZAppDelegate.m */,
+				83F92B57179874060022F495 /* CDZLastFMScrobbler.h */,
+				83F92B58179874060022F495 /* CDZLastFMScrobbler.m */,
 				83F92B431798640E0022F495 /* CDZMusicTracker.h */,
 				83F92B441798640E0022F495 /* CDZMusicTracker.m */,
 				837C01631731556500637EE2 /* CDZTracker.h */,
@@ -130,6 +140,7 @@
 				837C01591730BA2600637EE2 /* CDZTrackerViewController.m */,
 				837C016817318CA100637EE2 /* CDZWhereIsChrisAPIClient.h */,
 				837C016917318CA100637EE2 /* CDZWhereIsChrisAPIClient.m */,
+				83F92B5F179877510022F495 /* SNRMusicKit */,
 				837C01471730BA2600637EE2 /* Supporting Files */,
 				834AB6F8176A222800FC6069 /* Images - Temp for Launch Image */,
 			);
@@ -146,6 +157,17 @@
 				837C016D173196DE00637EE2 /* auth.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		83F92B5F179877510022F495 /* SNRMusicKit */ = {
+			isa = PBXGroup;
+			children = (
+				83F92B591798762B0022F495 /* SMKLastFMClient.h */,
+				83F92B5A1798762B0022F495 /* SMKLastFMClient.m */,
+				83F92B5C179876AB0022F495 /* NSString+SMKAdditions.h */,
+				83F92B5D179876AB0022F495 /* NSString+SMKAdditions.m */,
+			);
+			name = SNRMusicKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,12 +270,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83F92B5B1798762B0022F495 /* SMKLastFMClient.m in Sources */,
 				83F92B4717986A410022F495 /* CDZMusicTracker.m in Sources */,
 				837C014D1730BA2600637EE2 /* main.m in Sources */,
 				837C01511730BA2600637EE2 /* CDZAppDelegate.m in Sources */,
 				837C015A1730BA2600637EE2 /* CDZTrackerViewController.m in Sources */,
 				837C01651731556500637EE2 /* CDZTracker.m in Sources */,
 				837C016A17318CA100637EE2 /* CDZWhereIsChrisAPIClient.m in Sources */,
+				83F92B5E179876AB0022F495 /* NSString+SMKAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
