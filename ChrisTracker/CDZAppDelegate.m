@@ -23,7 +23,7 @@
 
 @synthesize ignoredErrorCodes = _ignoredErrorCodes;
 
-#pragma mark Lifecycle/callbacks/notifications
+#pragma mark Lifecycle/callbacks
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -37,33 +37,9 @@
 
     [self setupTracker];
     [self setupUpdateTimer];
-
-    UIDevice *device = [UIDevice currentDevice];
-    device.batteryMonitoringEnabled = YES;
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(batteryLevelChanged:)
-                                                 name:UIDeviceBatteryLevelDidChangeNotification
-                                               object:device];
+    [self setupBatteryMonitor];
 
     return YES;
-}
-
-- (void)batteryLevelChanged:(NSNotification *)notification
-{
-    CGFloat batterylevel = [UIDevice currentDevice].batteryLevel;
-    if (batterylevel <= 0.2 && batterylevel >= 0) {
-        [self.tracker stopLocationTracking];
-        [self displayBatteryWarning];
-    }
-}
-
-- (void)updateTimerFired:(id)sender
-{
-    NSParameterAssert(sender == self.minimumUpdateTimer);
-
-    if (!self.lastLocationUpdate || [self.lastLocationUpdate.timestamp timeIntervalSinceNow] < -self.forceUpdateInterval) {
-        if (self.tracker.isLocationTracking) [self.tracker forceLogLatestInfo];
-    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -162,7 +138,37 @@
     }
 }
 
-#pragma mark UI and Notifications
+- (void)setupBatteryMonitor
+{
+    UIDevice *device = [UIDevice currentDevice];
+    device.batteryMonitoringEnabled = YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(batteryLevelChanged:)
+                                                 name:UIDeviceBatteryLevelDidChangeNotification
+                                               object:device];
+}
+
+#pragma mark Notifications
+
+- (void)batteryLevelChanged:(NSNotification *)notification
+{
+    CGFloat batterylevel = [UIDevice currentDevice].batteryLevel;
+    if (batterylevel <= 0.2 && batterylevel >= 0) {
+        [self.tracker stopLocationTracking];
+        [self displayBatteryWarning];
+    }
+}
+
+- (void)updateTimerFired:(id)sender
+{
+    NSParameterAssert(sender == self.minimumUpdateTimer);
+
+    if (!self.lastLocationUpdate || [self.lastLocationUpdate.timestamp timeIntervalSinceNow] < -self.forceUpdateInterval) {
+        if (self.tracker.isLocationTracking) [self.tracker forceLogLatestInfo];
+    }
+}
+
+#pragma mark UI/user-facing notifications
 
 - (void)displayBatteryWarning
 {
@@ -170,7 +176,7 @@
                     withAppInForeground:self.appIsInForeground];
 }
 
-#pragma mark CDZTrackerDelegate methods
+#pragma mark CDZTrackerDelegate
 
 - (void)tracker:(CDZTracker *)tracker didUpdateLocation:(CLLocation *)location
 {
