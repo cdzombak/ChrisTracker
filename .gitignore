@@ -1,37 +1,27 @@
+# Xcode
 .DS_Store
-*.swp
-*~.nib
-
-build/
-
+*/build/*
 *.pbxuser
-*.perspective
-*.perspectivev3
+!default.pbxuser
 *.mode1v3
+!default.mode1v3
 *.mode2v3
-
-*.xcodeproj/project.xcworkspace/xcuserdata/*
-*.xcodeproj/xcuserdata/*
-
-# if not using Xcode 4:
-*.xcodeproj/project.xcworkspace/*
-
-# Xcode workspace
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
 xcuserdata
-
-# OCUnit2JUnit output
-test-reports
-
-# Bundler
-.bundle
-Vendor/bundle/ruby
-/bin
+profile
+*.moved-aside
+DerivedData
+.idea/
+*.hmap
+*.xccheckout
 
 # CocoaPods
 Pods
 
-# Clang scan-build
-# http://clang-analyzer.llvm.org/scan-build.html
-clangScanBuildReports/
+# bootstrap script
 
-auth.plist
+Vendor/
+.bundle/
+bin/
