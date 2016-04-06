@@ -1,5 +1,7 @@
 ## features
 
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
 * display currently logged info & last log date; allows start/stop logging or force log now
 * tap log info to go to map, with similar view to whereischris online
 * when powered: uses best nav/location info available and updates every 0.1 miles
